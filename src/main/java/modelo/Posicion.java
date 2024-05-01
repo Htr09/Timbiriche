@@ -9,6 +9,5 @@ package modelo;
  * @author icedo
  */
 public enum Posicion {
-    Vertical,
-    Horizontal;
+    VERTICAL, HORIZONTAL
 }

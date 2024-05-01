@@ -4,10 +4,85 @@
  */
 package modelo;
 
+import java.util.List;
+
 /**
  *
  * @author icedo
  */
 public class Tablero {
-    
+
+    private int dimension;
+    private List<Linea> lineasHorizontales;
+    private List<Linea> lineasVerticales;
+    private List<Cuadro> cuadros;
+    private List<Punto> puntos;
+
+    public Tablero(int dimension, List<Linea> lineasHorizontales, List<Linea> lineasVerticales, List<Cuadro> cuadros, List<Punto> puntos) {
+        this.dimension = dimension;
+        this.lineasHorizontales = lineasHorizontales;
+        this.lineasVerticales = lineasVerticales;
+        this.cuadros = cuadros;
+        this.puntos = puntos;
+    }
+
+
+    public int getDimension() {
+        return dimension;
+    }
+
+    public void setDimension(int dimension) {
+        this.dimension = dimension;
+    }
+
+    public List<Linea> getLineasHorizontales() {
+        return lineasHorizontales;
+    }
+
+    public void setLineasHorizontales(List<Linea> lineasHorizontales) {
+        this.lineasHorizontales = lineasHorizontales;
+    }
+
+    public List<Linea> getLineasVerticales() {
+        return lineasVerticales;
+    }
+
+    public void setLineasVerticales(List<Linea> lineasVerticales) {
+        this.lineasVerticales = lineasVerticales;
+    }
+
+    public List<Cuadro> getCuadros() {
+        return cuadros;
+    }
+
+    public void setCuadros(List<Cuadro> cuadros) {
+        this.cuadros = cuadros;
+    }
+
+    public List<Punto> getPuntos() {
+        return puntos;
+    }
+
+    public void setPuntos(List<Punto> puntos) {
+        this.puntos = puntos;
+    }
+
+    public void generaInstanciasDeFiguraJuego() {
+        
+        for (int i = 0; i < ((dimension - 1) * dimension); i++) {
+            lineasHorizontales.add(new Linea(Posicion.HORIZONTAL, null, i));
+            lineasVerticales.add(new Linea(Posicion.VERTICAL, null, i));
+        }
+        for (int i = 0; i < dimension - 1; i++) {
+            int indicador = i;
+            for (int j = i * (dimension - 1); j < i * (dimension - 1) + (dimension - 1); j++) {
+                cuadros.add(new Cuadro(lineasHorizontales.get(j),
+                        lineasHorizontales.get(j + (dimension - 1)),
+                        lineasVerticales.get(indicador),
+                        lineasVerticales.get(indicador + (dimension - 1)), null, j));
+
+                indicador += (dimension - 1);
+            }
+        }
+    }
 }

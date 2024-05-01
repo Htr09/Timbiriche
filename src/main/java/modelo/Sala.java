@@ -4,20 +4,13 @@
  */
 package modelo;
 
-import java.util.List;
+
 
 /**
  *
  * @author icedo
  */
 public class Sala {
-    private int numeroJugadores;
-    private  List<Jugador> jugadores;
-    private Jugador lider;
     
-    
-    public void VotarIniciarPartida(){
-        
-    }
     
 }
