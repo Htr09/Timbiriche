@@ -4,6 +4,7 @@
  */
 package modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +19,32 @@ public class Tablero {
     private List<Cuadro> cuadros;
     private List<Punto> puntos;
 
+    public Tablero(){
+        lineasHorizontales = new ArrayList<>();
+        lineasVerticales = new ArrayList<>();
+        cuadros = new ArrayList<>();
+        puntos = new ArrayList<>();
+    }
+
+    public Tablero(int tamanio) {
+        lineasHorizontales = new ArrayList<>();
+        lineasVerticales = new ArrayList<>();
+        cuadros = new ArrayList<>();
+        puntos = new ArrayList<>();
+
+        switch (tamanio) {
+            case 2:
+                this.dimension = 10;
+                break;
+            case 3:
+                this.dimension = 20;
+                break;
+            case 4:
+                this.dimension = 40;
+                break;
+        }
+    }
+    
     public Tablero(int dimension, List<Linea> lineasHorizontales, List<Linea> lineasVerticales, List<Cuadro> cuadros, List<Punto> puntos) {
         this.dimension = dimension;
         this.lineasHorizontales = lineasHorizontales;
@@ -25,7 +52,6 @@ public class Tablero {
         this.cuadros = cuadros;
         this.puntos = puntos;
     }
-
 
     public int getDimension() {
         return dimension;
@@ -66,7 +92,7 @@ public class Tablero {
     public void setPuntos(List<Punto> puntos) {
         this.puntos = puntos;
     }
-
+           
     public void generaInstanciasDeFiguraJuego() {
         
         for (int i = 0; i < ((dimension - 1) * dimension); i++) {
