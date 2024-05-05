@@ -4,25 +4,86 @@
  */
 package vista;
 
+import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import modelo.Jugador;
 
 /**
  *
  * @author Jonathan Cabrera
  */
-public class SalaEspera extends javax.swing.JPanel implements java.beans.Customizer {
+public class SalaEspera extends javax.swing.JPanel implements java.beans.Customizer{
     
-    private Object bean;
+    private Jugador jugador;
+    private String ip;
+    private int port;
+    private static SalaEspera instance;
 
     /**
      * Creates new customizer SalaEspera
      */
     public SalaEspera() {
         initComponents();
+        this.setSize(540, 400);
+        this.setLocationRelativeTo(null);
+        this.setTitle("Sala de espera. Un momento");
+        this.sck = new Cliente(jugador, this);
     }
     
-    public void setObject(Object bean) {
-        this.bean = bean;
+    public static SalaEspera getInstance() {
+        if (instance == null) {
+            instance = new SalaEspera();
+        }
+        return instance;
+    }
+    
+    public boolean ejecutarConexion(Jugador jugador, String ip, int port) {
+        this.jugador = jugador;
+
+        this.ip = ip;
+        this.port = port;
+
+        if (sck.conectarAlServidor(this.ip, this.port)) {
+            System.out.println("Conectado con exito");
+            sck.enviarAlServidor(this.jugador);
+            sck.escucharAlServidor();
+            return true;
+        } else {
+            System.out.println("No se pudo conectar con el servidor");
+            return false;
+        }
+    }
+
+    public void recibirMensaje(String mensaje) {
+        lblMensaje.setText(mensaje);
+        lblMensaje.revalidate();
+        validate();
+    }
+
+    public void recibirJugadores(List<Jugador> jugadores) {
+        for (int i = 0; i < jugadores.size(); i++) {
+            switch (i) {
+                case 0:
+                    this.lblJugador1.setIcon(new ImageIcon("src\\Avatares\\" + jugadores.get(i).getAvatar()));
+                    
+                    break;
+                case 1:
+                    this.lblJugador2.setIcon(new ImageIcon("src\\Avatares\\" + jugadores.get(i).getAvatar()));
+                    
+                    break;
+                case 2:
+                    this.lblJugador3.setIcon(new ImageIcon("src\\Avatares\\" + jugadores.get(i).getAvatar()));
+                    
+                    break;
+                case 3:
+                    this.lblJugador4.setIcon(new ImageIcon("src\\Avatares\\" + jugadores.get(i).getAvatar()));
+
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     /**
@@ -199,4 +260,9 @@ public class SalaEspera extends javax.swing.JPanel implements java.beans.Customi
     private javax.swing.JLabel lblJugador4;
     private javax.swing.JLabel lblNombre;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void setObject(Object bean) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
