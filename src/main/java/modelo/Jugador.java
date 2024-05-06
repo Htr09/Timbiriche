@@ -20,12 +20,10 @@ public class Jugador {
     public Jugador() {
     }
 
-    public Jugador(String nombre, int puntaje, String color, String avatar, PreferenciaColor preferenciaColor) {
+    public Jugador(String nombre, int puntaje,String avatar) {
         this.nombre = nombre;
         this.puntaje = puntaje;
-        this.color = color;
         this.avatar = avatar;
-        this.preferenciaColor = preferenciaColor;
     }
     
     public Jugador(String nombre, String avatar) {

@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package modelo;
+package modelodto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -12,27 +13,27 @@ import java.util.Objects;
  *
  * @author icedo
  */
-public class Movimiento {
-    private Linea linea;
-    private List<Cuadro> cuadros = new ArrayList<>();
+public class MovimientoDTO implements Serializable{
+    private LineaDTO linea;
+    private List<CuadroDTO> cuadros = new ArrayList<>();
 
-    public Linea getLinea() {
+    public LineaDTO getLinea() {
         return linea;
     }
 
-    public void setLinea(Linea linea) {
+    public void setLinea(LineaDTO linea) {
         this.linea = linea;
     }
 
-    public List<Cuadro> getCuadros() {
+    public List<CuadroDTO> getCuadros() {
         return cuadros;
     }
 
-    public void setCuadros(List<Cuadro> cuadros) {
+    public void setCuadros(List<CuadroDTO> cuadros) {
         this.cuadros = cuadros;
     }
 
-    public void setCuadro(Cuadro cuadro) {
+    public void setCuadro(CuadroDTO cuadro) {
         if(cuadros.size() < 2){
             cuadros.add(cuadro);
         }else{
@@ -60,7 +61,7 @@ public class Movimiento {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Movimiento other = (Movimiento) obj;
+        final MovimientoDTO other = (MovimientoDTO) obj;
         if (!Objects.equals(this.linea, other.linea)) {
             return false;
         }
@@ -72,6 +73,6 @@ public class Movimiento {
 
     @Override
     public String toString() {
-        return "Movimiento{" + "linea=" + linea + ", cuadros=" + cuadros + '}';
+        return "MovimientoDTO{" + "linea=" + linea + ", cuadros=" + cuadros + '}';
     }
 }
