@@ -9,32 +9,32 @@ package modelo;
  * @author icedo
  */
 public class Figura {
-    private int width;
-    private int height;
+    private int ancho;
+    private int altura;
     private int x;
     private int y;
 
-    public Figura(int width, int height, int x, int y) {
-        this.width = width;
-        this.height = height;
+    public Figura(int ancho, int altura, int x, int y) {
+        this.ancho = ancho;
+        this.altura = altura;
         this.x = x;
         this.y = y;
     }
 
-    public int getWidth() {
-        return width;
+    public int getAncho() {
+        return ancho;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
+    public void setAncho(int ancho) {
+        this.ancho = ancho;
     }
 
-    public int getHeight() {
-        return height;
+    public int getAltura() {
+        return altura;
     }
 
-    public void setHeight(int height) {
-        this.height = height;
+    public void setAltura(int altura) {
+        this.altura = altura;
     }
 
     public int getX() {
@@ -56,8 +56,8 @@ public class Figura {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 23 * hash + this.width;
-        hash = 23 * hash + this.height;
+        hash = 23 * hash + this.ancho;
+        hash = 23 * hash + this.altura;
         hash = 23 * hash + this.x;
         hash = 23 * hash + this.y;
         return hash;
@@ -75,10 +75,10 @@ public class Figura {
             return false;
         }
         final Figura other = (Figura) obj;
-        if (this.width != other.width) {
+        if (this.ancho != other.ancho) {
             return false;
         }
-        if (this.height != other.height) {
+        if (this.altura != other.altura) {
             return false;
         }
         if (this.x != other.x) {

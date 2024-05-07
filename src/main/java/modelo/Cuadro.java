@@ -28,8 +28,8 @@ public class Cuadro extends FiguraJuego{
         this.derecha = derecha;
     }
 
-    public Cuadro(Linea arriba, Linea abajo, Linea izquierda, Linea derecha, Jugador jugador, int indice, int width, int height, int x, int y) {
-        super(jugador, indice, width, height, x, y);
+    public Cuadro(Linea arriba, Linea abajo, Linea izquierda, Linea derecha, Jugador jugador, int indice, int ancho, int altura, int x, int y) {
+        super(jugador, indice, ancho, altura, x, y);
         this.arriba = arriba;
         this.abajo = abajo;
         this.izquierda = izquierda;

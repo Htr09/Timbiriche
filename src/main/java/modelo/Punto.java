@@ -9,8 +9,8 @@ package modelo;
  * @author icedo
  */
 public class Punto extends Figura {
-   public Punto(int width, int height, int x, int y) {
-        super(width, height, x, y);
+   public Punto(int ancho, int altura, int x, int y) {
+        super(ancho, altura, x, y);
     }  
     
     

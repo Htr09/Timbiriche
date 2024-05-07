@@ -13,17 +13,17 @@ public class FiguraJuego extends Figura{
     private Jugador jugador;
     private int indice;
 
-    public FiguraJuego(int width, int height, int x, int y) {
-        super(width, height, x, y);
+    public FiguraJuego(int ancho, int altura, int x, int y) {
+        super(ancho, altura, x, y);
     }
 
-    public FiguraJuego(Jugador jugador, int width, int height, int x, int y) {
-        super(width, height, x, y);
+    public FiguraJuego(Jugador jugador, int ancho, int altura, int x, int y) {
+        super(ancho, altura, x, y);
         this.jugador = jugador;
     }
 
-    public FiguraJuego(Jugador jugador, int indice, int width, int height, int x, int y) {
-        super(width, height, x, y);
+    public FiguraJuego(Jugador jugador, int indice, int ancho, int altura, int x, int y) {
+        super(ancho, altura, x, y);
         this.jugador = jugador;
         this.indice = indice;
     }
