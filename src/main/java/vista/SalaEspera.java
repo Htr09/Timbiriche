@@ -6,6 +6,7 @@ package vista;
 
 import SocketCliente.Cliente;
 import SocketCliente.ICliente;
+import java.awt.Dimension;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -31,6 +32,7 @@ public class SalaEspera extends javax.swing.JFrame implements IActualizable{
     public SalaEspera() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setSize(new Dimension(567, 513));
         this.setTitle("Sala de espera...");
         this.sck = new Cliente(jugador, this);
     }
@@ -118,8 +120,6 @@ public class SalaEspera extends javax.swing.JFrame implements IActualizable{
         lblJugador4 = new javax.swing.JLabel();
         lblNombre4 = new javax.swing.JLabel();
         lblMensaje = new javax.swing.JLabel();
-
-        setLayout(new java.awt.BorderLayout());
 
         jpSalaEspera.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -299,15 +299,9 @@ public class SalaEspera extends javax.swing.JFrame implements IActualizable{
                     .addGroup(jpSalaEsperaLayout.createSequentialGroup()
                         .addGap(71, 71, 71)
                         .addComponent(jLabel3)))
-                .addContainerGap(167, Short.MAX_VALUE))
-            .addGroup(jpSalaEsperaLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(btnSalir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnVotacion, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpSalaEsperaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(25, 67, Short.MAX_VALUE)
                 .addGroup(jpSalaEsperaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(lblMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jpSalaEsperaLayout.createSequentialGroup()
@@ -319,6 +313,12 @@ public class SalaEspera extends javax.swing.JFrame implements IActualizable{
                             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(47, 47, 47))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpSalaEsperaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnSalir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVotacion, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
         );
         jpSalaEsperaLayout.setVerticalGroup(
             jpSalaEsperaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,20 +339,21 @@ public class SalaEspera extends javax.swing.JFrame implements IActualizable{
                         .addGap(18, 18, 18)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(lblMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                .addGap(33, 33, 33)
+                .addComponent(lblMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
                 .addGroup(jpSalaEsperaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalir)
                     .addComponent(btnVotacion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
-        add(jpSalaEspera, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jpSalaEspera, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         int confirm = JOptionPane.showConfirmDialog(this, "¿Seguro que quiere cerrar el juego?", "Confirmacion", JOptionPane.YES_NO_OPTION);
 
+        
         if (confirm == JOptionPane.YES_OPTION) {
             System.exit(0);
         }

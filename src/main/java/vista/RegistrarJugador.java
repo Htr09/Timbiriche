@@ -7,6 +7,7 @@ package vista;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import modelo.Jugador;
+import modelo.PreferenciaColor;
 
 /**
  *
@@ -232,6 +233,9 @@ public class RegistrarJugador extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, mensaje, "Registro de jugador", JOptionPane.INFORMATION_MESSAGE);
         } else{
             Jugador jugador = new Jugador(this.txtNomJugador.getText(), this.avatarSeleccionado);
+            PreferenciaColor pref = new PreferenciaColor("#FF0000", "#0000FF", "#00FF00");
+            jugador.setPreferenciaColor(pref);
+            jugador.setColor("#0F0F0");
             menu.setJugador(jugador);
             this.dispose();
         }
