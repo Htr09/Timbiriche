@@ -92,20 +92,20 @@ public class SckCliente implements Runnable {
                     String string = (String) objeto;
                     objeto = string;
                 } else if (objeto instanceof IndicadorTurnoDTO) {
-                    IndicadorTurnoDTO marcadorDTO = (IndicadorTurnoDTO) objeto;
-                    List<JugadorDTO> jugadoresDTO = marcadorDTO.getJugadores();
+                    IndicadorTurnoDTO indicadorTurnoDTO = (IndicadorTurnoDTO) objeto;
+                    List<JugadorDTO> jugadoresDTO = indicadorTurnoDTO.getJugadores();
                     List<Jugador> jugadores = new ArrayList<>();
 
                     for (JugadorDTO jugador : jugadoresDTO) {
                         jugadores.add(new Jugador(jugador.getNombreJugador(), jugador.getAvatar(), jugador.getPuntaje()));
                     }
 
-                    IndicadorTurno marcador = new IndicadorTurno(jugadores);
+                    IndicadorTurno indicadorTurno = new IndicadorTurno(jugadores);
 
-                    objeto = marcador;
+                    objeto = indicadorTurno;
                 } else if (objeto instanceof RespuestaDTO) {
                     MovimientoDTO movimiento = ((RespuestaDTO) objeto).getMovimiento();
-                    List<FiguraJuego> formas = new ArrayList<>();
+                    List<FiguraJuego> figuras = new ArrayList<>();
 
                     if (movimiento.getLinea() != null) {
                         LineaDTO lineaDTO = movimiento.getLinea();
@@ -118,7 +118,7 @@ public class SckCliente implements Runnable {
                                         lineaDTO.getJugador().getPuntaje()),
                                 lineaDTO.getIndice());
 
-                        formas.add(linea);
+                        figuras.add(linea);
                     }
 
                     for (CuadroDTO cuadroDTO : movimiento.getCuadros()) {
@@ -129,26 +129,26 @@ public class SckCliente implements Runnable {
                                         cuadroDTO.getJugador().getPuntaje()),
                                 cuadroDTO.getIndice());
 
-                        formas.add(cuadro);
+                        figuras.add(cuadro);
                     }
 
-                    IndicadorTurnoDTO marcadorDTO = ((RespuestaDTO) objeto).getIndicadorTurno();
-                    System.out.println("MarcadorDTO " + marcadorDTO);
-                    List<JugadorDTO> jugadoresDTO = marcadorDTO.getJugadores();
+                    IndicadorTurnoDTO indicadorTurnoDTO = ((RespuestaDTO) objeto).getIndicadorTurno();
+                    System.out.println("IndicadorTurnoDTO " + indicadorTurnoDTO);
+                    List<JugadorDTO> jugadoresDTO = indicadorTurnoDTO.getJugadores();
                     List<Jugador> jugadores = new ArrayList<>();
 
                     for (JugadorDTO jugador : jugadoresDTO) {
                         jugadores.add(new Jugador(jugador.getNombreJugador(), jugador.getAvatar(), jugador.getPuntaje()));
                     }
 
-                    IndicadorTurno marcador = new IndicadorTurno(jugadores);
-                    System.out.println(marcador);
-                    objeto = marcador;
+                    IndicadorTurno indicadorTurno = new IndicadorTurno(jugadores);
+                    System.out.println(indicadorTurno);
+                    objeto = indicadorTurno;
 
                     //Solo para enviar el marcador
                     mostrarCambios();
 
-                    objeto = formas;
+                    objeto = figuras;
                 }
 
                 mostrarCambios();
