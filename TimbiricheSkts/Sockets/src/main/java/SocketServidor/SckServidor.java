@@ -17,7 +17,7 @@ import java.util.List;
 public class SckServidor {
 
     static volatile List<SckHilos> hilos = new ArrayList<>();
-    static int MAX = 4;
+    static int MAX = 2;
     private SocketPartida sp = new SocketPartida();
     
     public static void main(String[] args) throws IOException{

@@ -145,7 +145,6 @@ public class SckCliente implements Runnable {
                     System.out.println(indicadorTurno);
                     objeto = indicadorTurno;
 
-                    //Solo para enviar el marcador
                     mostrarCambios();
 
                     objeto = figuras;

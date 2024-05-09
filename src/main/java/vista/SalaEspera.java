@@ -400,7 +400,7 @@ public class SalaEspera extends javax.swing.JFrame implements IActualizable{
         } else if (mensaje instanceof List) {
             recibirJugadores((List<Jugador>) mensaje);
         } else if (mensaje instanceof IndicadorTurno) {
-            Tablero tab = new Tablero((IndicadorTurno) mensaje, this.jugador);
+            TableroJuego tab = new TableroJuego((IndicadorTurno) mensaje, this.jugador);
             tab.setVisible(true);
             this.setVisible(false);
         }

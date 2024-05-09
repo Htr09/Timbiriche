@@ -4,28 +4,50 @@
  */
 package vista;
 
+import SocketCliente.Cliente;
+import SocketCliente.ICliente;
+import java.util.List;
 import javax.swing.JOptionPane;
+import modelo.Cuadro;
+import modelo.FiguraJuego;
 import modelo.IndicadorTurno;
 import modelo.Jugador;
+import modelo.Linea;
+import modelo.Sala;
+import modelo.Tablero;
 
 /**
  *
  * @author Jonathan Cabrera
  */
-public class Tablero extends javax.swing.JFrame implements java.beans.Customizer {
+public class TableroJuego extends javax.swing.JFrame implements PanelObservador, IActualizable {
     
-    private Object bean;
+    private Sala sala;
+    private Jugador jugador;
+    private ICliente sck;
+    private PnlTablero pnlTablero;    
 
     /**
      * Creates new customizer Tablero
+     * @param indicador
+     * @param jugador
      */
-    public Tablero(IndicadorTurno indicador, Jugador jugador) {
+    public TableroJuego(IndicadorTurno indicador, Jugador jugador) {
+        this.jugador = jugador;
         initComponents();
+        this.setTitle("Sala de juego - " + jugador.getNombre());
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.sck = new Cliente(this.jugador, this);
+        
+        Tablero tablero = new Tablero(indicador.getJugadores().size());
+        this.sala = new Sala(indicador, tablero, indicador.getJugadores().size());
+        System.out.println(this.sala.toString());
+        ponerColores();
+        ponerMarcador();
+        ponerTablero();
     }
     
-    public void setObject(Object bean) {
-        this.bean = bean;
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,20 +58,15 @@ public class Tablero extends javax.swing.JFrame implements java.beans.Customizer
     private void initComponents() {
 
         jpTablero = new javax.swing.JPanel();
-        lblTablero = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         pnlJugador2 = new javax.swing.JPanel();
         pnlJugador3 = new javax.swing.JPanel();
         pnlJugador1 = new javax.swing.JPanel();
         pnlJugador4 = new javax.swing.JPanel();
         btnSalir = new javax.swing.JButton();
-
-        setLayout(new java.awt.BorderLayout());
+        panelTablero = new javax.swing.JPanel();
 
         jpTablero.setBackground(new java.awt.Color(255, 255, 255));
-
-        lblTablero.setText("                                                                                                         Tablero");
-        lblTablero.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 153));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -141,9 +158,20 @@ public class Tablero extends javax.swing.JFrame implements java.beans.Customizer
                 .addComponent(pnlJugador3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlJugador4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
                 .addComponent(btnSalir)
                 .addContainerGap())
+        );
+
+        javax.swing.GroupLayout panelTableroLayout = new javax.swing.GroupLayout(panelTablero);
+        panelTablero.setLayout(panelTableroLayout);
+        panelTableroLayout.setHorizontalGroup(
+            panelTableroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 708, Short.MAX_VALUE)
+        );
+        panelTableroLayout.setVerticalGroup(
+            panelTableroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jpTableroLayout = new javax.swing.GroupLayout(jpTablero);
@@ -152,20 +180,18 @@ public class Tablero extends javax.swing.JFrame implements java.beans.Customizer
             jpTableroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpTableroLayout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblTablero, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelTablero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpTableroLayout.setVerticalGroup(
             jpTableroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jpTableroLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTablero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(panelTablero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        add(jpTablero, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jpTablero, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -181,10 +207,133 @@ public class Tablero extends javax.swing.JFrame implements java.beans.Customizer
     private javax.swing.JButton btnSalir;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jpTablero;
-    private javax.swing.JLabel lblTablero;
+    private javax.swing.JPanel panelTablero;
     private javax.swing.JPanel pnlJugador1;
     private javax.swing.JPanel pnlJugador2;
     private javax.swing.JPanel pnlJugador3;
     private javax.swing.JPanel pnlJugador4;
     // End of variables declaration//GEN-END:variables
+
+    private void ponerColores() {
+        int index = this.sala.getIndicadorTurno().getJugadores().indexOf(this.jugador);
+        this.sala.getIndicadorTurno().getJugadores().get(index).setColor(this.jugador.getColor());
+
+        int indicador = 0;
+        for (int i = 0; i < this.sala.getIndicadorTurno().getJugadores().size(); i++) {
+            if (!this.sala.getIndicadorTurno().getJugadores().get(i).equals(this.jugador)) {
+                this.sala.getIndicadorTurno().getJugadores().get(i).setColor(this.jugador.getPreferenciaColor().getColores().get(indicador));
+                indicador++;
+            }
+        }
+    }
+
+    private void ponerMarcador() {
+        for (int i = 0; i < this.sala.getIndicadorTurno().getJugadores().size(); i++) {
+            switch (i) {
+                case 0:
+                    pnlJugador1.add(new PnlJugador(this.sala.getIndicadorTurno().getJugadores().get(i)));
+                    pnlJugador1.revalidate();
+                    break;
+                case 1:
+                    pnlJugador2.add(new PnlJugador(this.sala.getIndicadorTurno().getJugadores().get(i)));
+                    pnlJugador2.revalidate();
+                    break;
+                case 2:
+                    pnlJugador3.add(new PnlJugador(this.sala.getIndicadorTurno().getJugadores().get(i)));
+                    pnlJugador3.revalidate();
+                    break;
+                case 3:
+                    pnlJugador4.add(new PnlJugador(this.sala.getIndicadorTurno().getJugadores().get(i)));
+                    pnlJugador4.revalidate();
+                    break;
+                default:
+                    break;
+            }
+
+            this.validate();
+
+        }
+    }
+
+    private void ponerTablero() {
+        this.pnlTablero = new PnlTablero(this.sala.getTablero(), jugador);
+        pnlTablero.agrega(this);
+        pnlTablero.setSize(this.panelTablero.getSize());
+        pnlTablero.setBorder(this.panelTablero.getBorder());
+        this.panelTablero.add(pnlTablero);
+        pnlTablero.estableceTablero();
+        pnlTablero.setVisible(true);
+        pnlTablero.repaint();
+    }
+    
+    private void actualizarMarcador(IndicadorTurno indicadorTurno) {
+        for (int i = 0; i < this.sala.getIndicadorTurno().getJugadores().size(); i++) {
+            switch (i) {
+                case 0:
+                    ((PnlJugador) pnlJugador1.getComponent(0)).setPuntaje(indicadorTurno.getJugadores().get(i).getPuntaje());
+                    pnlJugador1.revalidate();
+                    break;
+                case 1:
+                    ((PnlJugador) pnlJugador2.getComponent(0)).setPuntaje(indicadorTurno.getJugadores().get(i).getPuntaje());
+                    pnlJugador2.revalidate();
+                    break;
+                case 2:
+                    ((PnlJugador) pnlJugador3.getComponent(0)).setPuntaje(indicadorTurno.getJugadores().get(i).getPuntaje());
+                    pnlJugador3.revalidate();
+                    break;
+                case 3:
+                    ((PnlJugador) pnlJugador4.getComponent(0)).setPuntaje(indicadorTurno.getJugadores().get(i).getPuntaje());
+                    pnlJugador4.revalidate();
+                    break;
+                default:
+                    break;
+            }
+
+            this.validate();
+        }
+    }
+
+    public Sala getSala() {
+        return sala;
+    }
+
+    public void setSala(Sala sala) {
+        this.sala = sala;
+    }
+    
+    @Override
+    public void actualiza(List<FiguraJuego> movimiento) {
+        sck.enviarAlServidor(movimiento);
+    }
+
+    @Override
+    public void actualizaDeSocket(Object mensaje) {
+        if(mensaje instanceof IndicadorTurno){
+            System.out.println("Marcador Actualizado...");
+            IndicadorTurno indicadorTurno =(IndicadorTurno) mensaje;
+            actualizarMarcador((IndicadorTurno) mensaje);
+            
+            for(int i = 0; i < indicadorTurno.getJugadores().size(); i++){
+                if(indicadorTurno.getJugadores().indexOf(this.jugador) == indicadorTurno.getSiguiente()){
+                    this.pnlTablero.actualizaTurno(true);
+                }
+            }
+        } else if(mensaje instanceof List){
+            List<FiguraJuego> figuras = (List<FiguraJuego>) mensaje;
+            
+            for (int i = 0; i < figuras.size(); i++) {
+                for (Jugador jugador : this.sala.getIndicadorTurno().getJugadores()) {
+                    if (jugador.equals(figuras.get(i).getJugador())) {
+                        figuras.get(i).setJugador(jugador);
+                        if (i == 0) {
+                            this.pnlTablero.actualizaLineaTablero((Linea) figuras.get(i));
+                        } else {
+                            this.pnlTablero.actualizaCuadroTablero((Cuadro) figuras.get(i));
+                        }
+                    }
+                }
+            }  
+        }
+    }
+    
 }
