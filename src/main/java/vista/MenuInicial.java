@@ -22,8 +22,6 @@ public class MenuInicial extends javax.swing.JFrame {
     public MenuInicial(Jugador jugador) {
         initComponents(); 
         this.setResizable(false);
-        this.setSize(new Dimension(540, 400));
-        this.setPreferredSize(new Dimension(540, 400));
         this.setLocationRelativeTo(null);
         this.setTitle("Timbiriche.");
 
@@ -69,9 +67,8 @@ public class MenuInicial extends javax.swing.JFrame {
         lblNombre = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btnConfigurar = new javax.swing.JButton();
-        btnIniciarPartida = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        btnCrearPartida = new javax.swing.JButton();
+        btnUnirsePartida = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -125,14 +122,6 @@ public class MenuInicial extends javax.swing.JFrame {
             }
         });
 
-        btnIniciarPartida.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btnIniciarPartida.setText("Unirse a Partida");
-        btnIniciarPartida.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIniciarPartidaActionPerformed(evt);
-            }
-        });
-
         btnSalir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnSalir.setText("Cerrar Juego");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -141,11 +130,11 @@ public class MenuInicial extends javax.swing.JFrame {
             }
         });
 
-        btnCrearPartida.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btnCrearPartida.setText("Crear Partida");
-        btnCrearPartida.addActionListener(new java.awt.event.ActionListener() {
+        btnUnirsePartida.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnUnirsePartida.setText("Unirse a Partida");
+        btnUnirsePartida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCrearPartidaActionPerformed(evt);
+                btnUnirsePartidaActionPerformed(evt);
             }
         });
 
@@ -167,8 +156,7 @@ public class MenuInicial extends javax.swing.JFrame {
                         .addGap(171, 171, 171)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnConfigurar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnIniciarPartida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCrearPartida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnUnirsePartida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -177,15 +165,13 @@ public class MenuInicial extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(btnCrearPartida)
-                .addGap(18, 18, 18)
-                .addComponent(btnIniciarPartida)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnUnirsePartida)
                 .addGap(18, 18, 18)
                 .addComponent(btnConfigurar)
-                .addGap(45, 45, 45)
+                .addGap(72, 72, 72)
                 .addComponent(btnSalir)
-                .addGap(16, 16, 16))
+                .addGap(45, 45, 45))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -196,7 +182,7 @@ public class MenuInicial extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 364, Short.MAX_VALUE)
         );
 
         pack();
@@ -215,30 +201,28 @@ public class MenuInicial extends javax.swing.JFrame {
         confi.setVisible(true);
     }//GEN-LAST:event_btnConfigurarActionPerformed
 
-    private void btnIniciarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarPartidaActionPerformed
-        
-    }//GEN-LAST:event_btnIniciarPartidaActionPerformed
-
-    private void btnCrearPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearPartidaActionPerformed
+    private void btnUnirsePartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnirsePartidaActionPerformed
         String ip = null, port = null;
 
+        ip = JOptionPane.showInputDialog(this, "Dirección IP", "¿A donde te quieres conectar?", JOptionPane.OK_CANCEL_OPTION);
+        port = JOptionPane.showInputDialog(this, "Puerto", "¿A donde quieres llegar?", JOptionPane.OK_CANCEL_OPTION);
         
 
         SalaEspera se = SalaEspera.getInstance();
         if(se.ejecutarConexion(jugador, ip, Integer.valueOf(port))){
+            System.out.println("sisisisi");
             se.setVisible(true);
             this.dispose();
         }else{
             JOptionPane.showMessageDialog(this,"No se pudo realizar la conexión con el servidor", "Fallo de Conexión", JOptionPane.ERROR_MESSAGE);
             se = null;
         }
-    }//GEN-LAST:event_btnCrearPartidaActionPerformed
+    }//GEN-LAST:event_btnUnirsePartidaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfigurar;
-    private javax.swing.JButton btnCrearPartida;
-    private javax.swing.JButton btnIniciarPartida;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnUnirsePartida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

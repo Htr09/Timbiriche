@@ -8,13 +8,8 @@ package vista;
  *
  * @author icedo
  */
-public class JuegoVista {
+public interface IActualizable {
     
-    
-    
-    public void ActualizarJuego(){
-        
-    }
-    
-    
+    void actualizaDeSocket(Object mensaje);
+   
 }

@@ -20,7 +20,7 @@ public class Jugador {
     public Jugador() {
     }
 
-    public Jugador(String nombre, int puntaje,String avatar) {
+    public Jugador(String nombre, String avatar, int puntaje) {
         this.nombre = nombre;
         this.puntaje = puntaje;
         this.avatar = avatar;

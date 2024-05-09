@@ -5,6 +5,8 @@
 package vista;
 
 import javax.swing.JOptionPane;
+import modelo.IndicadorTurno;
+import modelo.Jugador;
 
 /**
  *
@@ -17,7 +19,7 @@ public class Tablero extends javax.swing.JPanel implements java.beans.Customizer
     /**
      * Creates new customizer Tablero
      */
-    public Tablero() {
+    public Tablero(IndicadorTurno indicador, Jugador jugador) {
         initComponents();
     }
     

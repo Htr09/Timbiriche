@@ -19,11 +19,12 @@ import modelodto.LineaDTO;
  *
  * @author icedo
  */
-public class DTOControlador {
+public class DTOControlador implements IDTOControlador {
     
     private JuegoControlador jc = JuegoControlador.getInstance();
     
     
+    @Override
     public IndicadorTurnoDTO obtenerIndicadorTurno() {
         IndicadorTurno indicadorTurno = jc.obtenerIndicadorTurno();
 
@@ -37,6 +38,7 @@ public class DTOControlador {
     }
 
     
+    @Override
     public LineaDTO obtenerUltimaLinea() {
         Linea linea = jc.obtenerUltimaLinea();
         if (linea != null) {
@@ -55,6 +57,7 @@ public class DTOControlador {
     }
 
    
+    @Override
     public CuadroDTO obtenerUltimoCuadro() {
         Cuadro cuadro = jc.obtenerUltimoCuadro();
         CuadroDTO cuadroDTO
@@ -67,6 +70,7 @@ public class DTOControlador {
     }
 
     
+    @Override
     public int obtenerTurnoSiguiente() {
         return jc.obtenerTurnoSiguiente();
     }
